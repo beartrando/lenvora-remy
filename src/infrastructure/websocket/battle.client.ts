@@ -76,7 +76,7 @@
 //         const auth = await this.getAuth();
 //         const profile = await this.getProfile();
 //
-//         // logger.log(`ws://${app.webSocketStreaming}/engine?token=${auth.accessToken}&profileId=${profile.id}`);
+//         // logger.log(`ws://${app.webSocketStreaming}/gusteau?token=${auth.accessToken}&profileId=${profile.id}`);
 //         this.ws = new WebSocket(`ws://${config.webSocketStreaming}/battle?token=${auth.accessToken}&profileId=${profile.id}`);
 //
 //         this.ws.on("message", this.messageHandler);

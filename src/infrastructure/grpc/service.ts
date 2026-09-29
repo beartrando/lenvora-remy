@@ -54,7 +54,7 @@ export class GrpcService {
     }
 
     private addServices() {
-        // this.registerEngineService();
+        // this.registerGusteauService();
         this.registerHealthService();
     }
 }
