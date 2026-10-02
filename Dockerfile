@@ -14,11 +14,11 @@ COPY package.json ./
 COPY pnpm-workspace.yaml ./
 COPY tsconfig.base.json ./
 
-COPY services/gusteau/package*.json ./services/gusteau/
-COPY services/gusteau/jest.config.js ./services/gusteau/
-COPY services/gusteau/tsconfig.json ./services/gusteau/
-COPY services/gusteau/src ./services/gusteau/src/
-COPY services/gusteau/__tests__ ./services/gusteau/__tests__/
+COPY services/remy/package*.json ./services/remy/
+COPY services/remy/jest.config.js ./services/remy/
+COPY services/remy/tsconfig.json ./services/remy/
+COPY services/remy/src ./services/remy/src/
+COPY services/remy/__tests__ ./services/remy/__tests__/
 
 RUN apt-get update && apt-get install -y protobuf-compiler
 
@@ -31,18 +31,18 @@ FROM base AS deps
 RUN pnpm fetch
 RUN pnpm install --offline --frozen-lockfile
 
-RUN mkdir -p ./services/gusteau/src/contracts/proto
-RUN pnpm --filter gusteau proto:generate
+RUN mkdir -p ./services/remy/src/contracts/proto
+RUN pnpm --filter remy proto:generate
 
 RUN mkdir -p ./shared/errors/src/contracts/proto
 RUN pnpm --filter @shared/errors proto:generate
 
-RUN pnpm --filter gusteau prisma:generate
+RUN pnpm --filter remy prisma:generate
 
 # ---------- DEV ----------
 FROM deps AS dev
 
-COPY services/gusteau/tsconfig.test.json ./services/gusteau/
+COPY services/remy/tsconfig.test.json ./services/remy/
 
 ENV NODE_ENV=development
 
@@ -52,7 +52,7 @@ USER node
 
 EXPOSE 50051
 
-CMD ["pnpm", "--filter", "gusteau", "dev"]
+CMD ["pnpm", "--filter", "remy", "dev"]
 
 HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 \
   CMD nc -z localhost 50051 || exit 1
@@ -68,9 +68,9 @@ RUN pnpm --filter @shared/errors build
 RUN pnpm --filter @shared/kafka-manager build
 RUN pnpm --filter @shared/pg-boss-manager build
 
-RUN pnpm --filter gusteau build
+RUN pnpm --filter remy build
 
-RUN pnpm --filter gusteau deploy /deploy --prod
+RUN pnpm --filter remy deploy /deploy --prod
 
 # ---------- PROD ----------
 FROM node:22 AS prod
@@ -111,6 +111,6 @@ RUN printf "%s\n" "$VERSION" > VERSION
 
 LABEL org.opencontainers.image.version="$VERSION"
 
-WORKDIR /usr/src/app/services/gusteau
+WORKDIR /usr/src/app/services/remy
 
-CMD ["pnpm", "--filter", "gusteau", "migrate:deploy"]
+CMD ["pnpm", "--filter", "remy", "migrate:deploy"]

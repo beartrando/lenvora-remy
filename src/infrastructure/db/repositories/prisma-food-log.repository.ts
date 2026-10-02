@@ -10,6 +10,7 @@ export class PrismaFoodLogRepository implements FoodLogRepository {
         private readonly prisma: PrismaClient,
     ) {
     }
+
     async save(foodLog: FoodLogEntity): Promise<FoodLogEntity> {
         const data = FoodLogDbMapper.toPersistence(foodLog);
 

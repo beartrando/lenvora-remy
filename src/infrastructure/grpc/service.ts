@@ -1,9 +1,8 @@
 import * as grpc from "@grpc/grpc-js";
 import * as healthProto from '../../contracts/proto/common/health';
-import * as gusteauProto from '../../contracts/proto/gusteau';
 import logger from "@shared/logger";
 import HealthHandler from "./handlers/health.handler";
-import GusteauHandler from "./handlers/gusteau.handler";
+import RemyHandler from "./handlers/remy.handler";
 
 export class GrpcService {
     private readonly server: grpc.Server;
@@ -11,7 +10,7 @@ export class GrpcService {
     constructor(
         private readonly port: number,
         private readonly healthHandler: HealthHandler,
-        private readonly gusteauHandler: GusteauHandler,
+        private readonly remyHandler: RemyHandler,
     ) {
         this.server = new grpc.Server();
     }
@@ -47,16 +46,9 @@ export class GrpcService {
         this.server.forceShutdown();
     }
 
-    private registerGusteauService() {
-        this.server.addService(gusteauProto.GusteauService, {
-            CreateProduct: this.gusteauHandler.createProduct.bind(this.gusteauHandler),
-            GetProduct: this.gusteauHandler.getProduct.bind(this.gusteauHandler),
-            GetNutritionCoefficient: this.gusteauHandler.getNutritionCoefficient.bind(this.gusteauHandler),
-            UpdateNutritionCoefficient: this.gusteauHandler.updateNutritionCoefficient.bind(this.gusteauHandler),
-            CreateFoodLog: this.gusteauHandler.createFoodLog.bind(this.gusteauHandler),
-            GetFoodLog: this.gusteauHandler.getFoodLog.bind(this.gusteauHandler),
-        });
+    private registerRemyService() {
     }
+
     private registerHealthService() {
         this.server.addService(healthProto.HealthService, {
             check: this.healthHandler.check.bind(this.healthHandler),
@@ -67,7 +59,7 @@ export class GrpcService {
     }
 
     private addServices() {
-        this.registerGusteauService();
+        this.registerRemyService();
         this.registerHealthService();
     }
 }

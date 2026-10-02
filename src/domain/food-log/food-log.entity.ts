@@ -31,15 +31,12 @@ export class FoodLogEntity {
         readonly id: FoodLogId,
         readonly profileId: ProfileId,
         readonly productName: ProductName,
-
         readonly weight: FoodLogWeight,
         readonly planned: FoodLogPlanned,
-
         readonly calories: ProductCalories,
         readonly protein: ProductProtein,
         readonly fat: ProductFat,
         readonly carbs: ProductCarbs,
-
         readonly date: Date,
         readonly createdAt: Date | null,
         readonly updatedAt: Date | null,

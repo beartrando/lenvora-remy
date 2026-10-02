@@ -29,12 +29,12 @@ export class Application {
             await this.jobService.start();
             await this.grpcService.start();
             logger.info(
-                '🚀 Gusteau service started',
+                '🚀 Remy service started',
             );
         } catch (err) {
             logger.error(
                 {err},
-                '💥 Failed to start Gusteau service',
+                '💥 Failed to start Remy service',
             );
             process.exit(1);
         }

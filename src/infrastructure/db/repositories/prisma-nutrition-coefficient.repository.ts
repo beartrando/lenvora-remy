@@ -11,6 +11,7 @@ export class PrismaNutritionCoefficientRepository
         private readonly prisma: PrismaClient,
     ) {
     }
+
     async save(
         coefficients: NutritionCoefficientEntity,
     ): Promise<NutritionCoefficientEntity> {

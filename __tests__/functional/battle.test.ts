@@ -11,7 +11,6 @@ import AuthService from "../../src/infrastructure/auth/service";
 import authConfig from "../../src/infrastructure/auth/auth.config";
 import ProfileService from "../../src/infrastructure/profile/service";
 import * as streamingProto from "../../src/contracts/proto/streaming";
-import * as battleProto from "../../src/contracts/proto/battle";
 import RefreshTokensUseCase from "../../src/application/use-cases/auth/refresh-tokens";
 import BattleEntity from "../../src/domain/battle/battle.entity";
 import BattleUpdtedUseCaseInterface from "../../src/infrastructure/websocket/handlers/battle-updted-use-case-interface";
@@ -19,7 +18,7 @@ import BattleStatusEnum from "../../src/domain/battle/enums/battle-status.enum";
 import BattleStatus from "../../src/domain/battle/value-objects/battle-status.vo";
 
 
-class BattleMoveUseCase implements BattleUpdtedUseCaseInterface{
+class BattleMoveUseCase implements BattleUpdtedUseCaseInterface {
     private counter = 0;
 
     private _battle: BattleEntity | null = null;
@@ -96,7 +95,7 @@ describe("Gateway Service", () => {
         // console.log(accessToken2);
 
         if (!accessToken1 || !accessToken2) {
-            throw new Error("Failed to authenticate test gusteaus");
+            throw new Error("Failed to authenticate test remys");
         }
 
         const fetchProfileUseCase = new FetchProfileUseCase(httpService);

@@ -3,6 +3,7 @@ import ProfileId from "../profile/value-objects/profile-id.vo";
 
 export interface FoodLogRepository {
     save(foodLog: FoodLogEntity): Promise<FoodLogEntity>;
+
     findByProfileId(profileId: ProfileId): Promise<FoodLogEntity[]>;
 }
 

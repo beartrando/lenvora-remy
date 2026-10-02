@@ -1,5 +1,5 @@
 export const appConfig = {
-    appName: process.env.APP_NAME ?? 'gusteau',
+    appName: process.env.APP_NAME ?? 'remy',
     appVersion: process.env.APP_VERSION ?? 'undefined',
     appEnv: process.env.APP_ENV ?? 'production',
 };

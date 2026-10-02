@@ -25,7 +25,7 @@ import UpdateNutritionCoefficientUseCase
     from "../application/use-cases/nutrition-coefficient/update-nutrition-coefficient";
 import CreateFoodLogUseCase from "../application/use-cases/food-log/create-food-log";
 import GetFoodLogsUseCase from "../application/use-cases/food-log/get-food-logs";
-import GusteauHandler from "../infrastructure/grpc/handlers/gusteau.handler";
+import RemyHandler from "../infrastructure/grpc/handlers/remy.handler";
 import DbService from "../infrastructure/db/service";
 
 
@@ -91,7 +91,7 @@ function buildApplication() {
         readyzUseCase,
     );
 
-    const gusteauHandler = new GusteauHandler(
+    const remyHandler = new RemyHandler(
         createProductUseCase,
         getProductUseCase,
         getNutritionCoefficientUseCase,
@@ -103,7 +103,7 @@ function buildApplication() {
     const grpcService = new GrpcService(
         grpcConfig.port,
         healthHandler,
-        gusteauHandler,
+        remyHandler,
     );
 
     return new Application(

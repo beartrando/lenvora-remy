@@ -1,9 +1,11 @@
 import {NutritionCoefficient} from "@prisma/client";
 import NutritionCoefficientEntity from "../../../domain/nutrition-coefficient/nutrition-coefficient.entity";
 import NutritionCoefficientId from "../../../domain/nutrition-coefficient/value-objects/nutrition-coefficient-id.vo";
-import NutritionProteinCoefficient from "../../../domain/nutrition-coefficient/value-objects/nutrition-protein-coefficient.vo";
+import NutritionProteinCoefficient
+    from "../../../domain/nutrition-coefficient/value-objects/nutrition-protein-coefficient.vo";
 import NutritionFatCoefficient from "../../../domain/nutrition-coefficient/value-objects/nutrition-fat-coefficient.vo";
-import NutritionCarbsCoefficient from "../../../domain/nutrition-coefficient/value-objects/nutrition-carbs-coefficient.vo";
+import NutritionCarbsCoefficient
+    from "../../../domain/nutrition-coefficient/value-objects/nutrition-carbs-coefficient.vo";
 import ProfileId from "../../../domain/profile/value-objects/profile-id.vo";
 
 type NutritionCoefficientSaveData = Omit<
