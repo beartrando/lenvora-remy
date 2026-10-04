@@ -1,5 +1,5 @@
 import * as grpc from "@grpc/grpc-js";
-import {RemyClient, RemyRequest, RemyResponse} from "../../src/contracts/proto/remy";
+import {RemyClient, RemyRequest, RemyResponse} from "../../../contracts/proto/remy";
 
 // Функциональный тест: ходит в реальный gRPC-сервер на localhost:50051.
 // Запускается внутри контейнера сервиса (см. Makefile: make test).

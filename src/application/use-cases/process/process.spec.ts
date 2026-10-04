@@ -1,4 +1,4 @@
-import ProcessUseCase from "../../src/application/use-cases/process/process";
+import ProcessUseCase from "./process";
 
 describe("ProcessUseCase", () => {
 
