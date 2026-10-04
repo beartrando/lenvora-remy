@@ -1,23 +1,27 @@
-import CreateProductUseCase from "../../../application/use-cases/product/create-product";
-import GetProductUseCase from "../../../application/use-cases/product/get-product";
-import GetNutritionCoefficientUseCase
-    from "../../../application/use-cases/nutrition-coefficient/get-nutrition-coefficient";
-import UpdateNutritionCoefficientUseCase
-    from "../../../application/use-cases/nutrition-coefficient/update-nutrition-coefficient";
-import CreateFoodLogUseCase from "../../../application/use-cases/food-log/create-food-log";
-import GetFoodLogsUseCase from "../../../application/use-cases/food-log/get-food-logs";
+import * as grpc from "@grpc/grpc-js";
+import * as remyProto from "../../../contracts/proto/remy";
+import callbackError from "./callback.error";
+import logger from "@shared/logger";
+import ProcessUseCase from "../../../application/use-cases/process/process";
 
 export class RemyHandler {
     constructor(
-        private readonly createProductUseCase: CreateProductUseCase,
-        private readonly getProductUseCase: GetProductUseCase,
-        private readonly getNutritionCoefficientUseCase: GetNutritionCoefficientUseCase,
-        private readonly updateNutritionCoefficientUseCase: UpdateNutritionCoefficientUseCase,
-        private readonly createFoodLogUseCase: CreateFoodLogUseCase,
-        private readonly getFoodLogsUseCase: GetFoodLogsUseCase,
+        private readonly processUseCase: ProcessUseCase,
     ) {
     }
 
+    process = async (
+        call: grpc.ServerUnaryCall<remyProto.RemyRequest, remyProto.RemyResponse>,
+        callback: grpc.sendUnaryData<remyProto.RemyResponse>,
+    ) => {
+        try {
+            const response = await this.processUseCase.execute(call.request);
+            callback(null, response,);
+        } catch (err) {
+            logger.log(err);
+            callbackError(callback, err,);
+        }
+    };
 }
 
 export default RemyHandler;
