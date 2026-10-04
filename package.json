@@ -46,7 +46,8 @@
     "jsonwebtoken": "^9.0.3",
     "kafkajs": "^2.2.4",
     "pg-boss": "^12.15.0",
-    "ws": "^8.21.0"
+    "ws": "^8.21.0",
+    "openai": "^5.12.2"
   },
   "prisma": {
     "schema": "./src/infrastructure/db/prisma/schema.prisma"
