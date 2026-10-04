@@ -1,5 +1,6 @@
 import * as grpc from "@grpc/grpc-js";
 import * as healthProto from '../../contracts/proto/common/health';
+import * as remyProto from '../../contracts/proto/remy';
 import logger from "@shared/logger";
 import HealthHandler from "./handlers/health.handler";
 import RemyHandler from "./handlers/remy.handler";
@@ -47,6 +48,9 @@ export class GrpcService {
     }
 
     private registerRemyService() {
+        this.server.addService(remyProto.RemyService, {
+            process: this.remyHandler.process.bind(this.remyHandler),
+        });
     }
 
     private registerHealthService() {
