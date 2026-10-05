@@ -18,7 +18,6 @@ COPY services/remy/package*.json ./services/remy/
 COPY services/remy/jest.config.js ./services/remy/
 COPY services/remy/tsconfig.json ./services/remy/
 COPY services/remy/src ./services/remy/src/
-COPY services/remy/__tests__ ./services/remy/__tests__/
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -49,6 +48,7 @@ RUN pnpm --filter remy prisma:generate
 FROM deps AS dev
 
 COPY services/remy/tsconfig.test.json ./services/remy/
+COPY services/remy/jest.setup.ts ./services/remy/
 
 ENV NODE_ENV=development
 
