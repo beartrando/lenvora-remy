@@ -37,7 +37,6 @@ export class MessageService {
         try {
             const producer = await this.getProducer();
 
-            // await producer.send('healthcheck', [{value: 'ping'}]);
             await producer.send('healthcheck', 'ping');
 
             return true;
@@ -53,7 +52,6 @@ export class MessageService {
     }
 
     private async createConsumers(): Promise<void> {
-        // logger.log(this.consumers);
         for (const consumer of this.consumers) {
             await createConsumer(
                 {

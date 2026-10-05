@@ -11,7 +11,6 @@
     "migrate": "prisma migrate dev",
     "migrate:deploy": "prisma migrate deploy",
     "migrate:reset": "prisma migrate reset",
-    "seed": "tsx src/infrastructure/db/seeds/seed.ts",
     "test": "jest"
   },
   "devDependencies": {

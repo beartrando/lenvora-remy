@@ -64,7 +64,7 @@ export class JobService {
         topic: string,
         data: T,
     ): Promise<number> {
-        const boss = await pgBossManager.waitUntilReady();
+        await pgBossManager.waitUntilReady();
 
         return pgBossManager.queue.enqueue(topic, data)
     }
@@ -74,7 +74,7 @@ export class JobService {
         data: T,
         tx: SqlExecutor,
     ): Promise<number> {
-        const boss = await pgBossManager.waitUntilReady();
+        await pgBossManager.waitUntilReady();
 
         return pgBossManager.queue.enqueueTx(topic, data, tx)
     }
