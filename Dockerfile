@@ -39,6 +39,15 @@ RUN pnpm install --offline --frozen-lockfile --ignore-scripts
 RUN mkdir -p ./services/remy/src/contracts/proto
 RUN pnpm --filter remy proto:generate
 
+RUN pnpm --filter @shared/cache-store build
+RUN pnpm --filter @shared/state-store build
+RUN pnpm --filter @shared/timer build
+RUN pnpm --filter @shared/logger build
+RUN pnpm --filter @shared/grpc-client-manager build
+RUN pnpm --filter @shared/errors proto:generate
+RUN pnpm --filter @shared/errors build
+RUN pnpm --filter @shared/kafka-manager build
+RUN pnpm --filter @shared/pg-boss-manager build
 
 RUN pnpm --filter remy prisma:generate
 
@@ -46,7 +55,6 @@ RUN pnpm --filter remy prisma:generate
 FROM deps AS dev
 
 COPY services/remy/tsconfig.test.json ./services/remy/
-COPY services/remy/jest.setup.ts ./services/remy/
 
 ENV NODE_ENV=development
 
@@ -66,11 +74,6 @@ FROM deps AS build
 
 ENV NODE_ENV=production
 
-
-RUN pnpm --filter @shared/logger build
-RUN pnpm --filter @shared/errors build
-RUN pnpm --filter @shared/kafka-manager build
-RUN pnpm --filter @shared/pg-boss-manager build
 RUN pnpm --filter remy build
 
 RUN pnpm --filter remy deploy /deploy --prod
