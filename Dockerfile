@@ -17,6 +17,7 @@ COPY tsconfig.base.json ./
 COPY services/remy/package*.json ./services/remy/
 COPY services/remy/jest.config.js ./services/remy/
 COPY services/remy/tsconfig.json ./services/remy/
+COPY services/remy/jest.setup.ts ./services/remy/
 COPY services/remy/src ./services/remy/src/
 
 RUN apt-get update \
